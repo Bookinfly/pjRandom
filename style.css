@@ -45,6 +45,10 @@ p b {
     color: #71a154
 }
 
+.pv {
+    color : #333
+}
+
 form {
     width: 100%;
     text-align: center;
