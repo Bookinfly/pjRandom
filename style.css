@@ -1,5 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Para que el padding y el borde no afecten al ancho/alto */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+:root {
+    --color-one: #253659;
+    --color-two: #cedddc;
+    --color-three: #04BF9D;
+    --color-four: #F28157;
+    --color-five: #BF665E;
+    --font-size: 16px;
+    --font-family: Arial, sans-serif;
+}
+
+
 body{
     overflow-x: hidden;
+    background-color: var(--color-one);
 }
 
 img {
@@ -10,43 +30,67 @@ img {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    color: #333;
+    color: var(--color-one);
     font-family: sans-serif;
+
 }
 
 .flex-item {
+    box-sizing: content-box;
     flex-grow: 1;
     margin: 20px;
     max-width: 300px;
-    border: 2px solid #333;
-    padding: 0 20px;
+    border: 2px solid var(--color-four);
+    background-color: var(--color-two);
+    overflow: hidden;
+    object-fit: cover;
+    padding: 1vh;
 }
 
 .flex-item:hover {
-    border-color: #71a154;
+    border-color: var(--color-two);
     box-shadow: 0 0 13px #31a274;
+    transition-duration: 0.5s;
+    padding: 3vh;
 }
 
 .flex-item:focus {
-    border-color: #71a154;
-    box-shadow: 0 0 13px #31a274;
+    border-color: var(--color-three);
+    box-shadow: 0 0 13px var(--color-two);
+    transition-duration: 0.5s;
+    padding: 2vh;
+}
+
+h1 {
+    margin: 15px;
+    font-size: 100px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: auto;
+    color: var(--color-four);
+    text-align: center;
 }
 
 h2 {
-    margin: 0;
+    margin: 30px;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: auto;
+    color: var(--color-two);
+    text-align: center;
 }
 
 h3 {
-    color: #999;
+    color: var(--color-five);
     margin: 0;
+    
 }
 
 p b {
-    color: #71a154
+    color: var(--color-one)
 }
 
 .pv {
-    color : #333
+    color : var(--color-one)
 }
 
 form {
@@ -56,12 +100,27 @@ form {
 }
 
 input[type="submit"]{
-    background: #31a274;
-    color: #ffe;
+    background: var(--color-two);
+    color: var(--color-one);
     border: none;
     padding: 12px 28px;
     font-size: 18px;
     letter-spacing: 1px;
+}
+
+footer{
+    background-color: var(--color-two);
+    width: 100%;
+    height: 30vh;
+}
+
+.banner {
+    width: 100vw;
+    height: 39vh;
+    overflow: hidden;
+    object-fit: cover;
+    top: 0;
+    opacity: 0.8;
 }
 
 
