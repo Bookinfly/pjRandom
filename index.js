@@ -29,7 +29,7 @@ const ilustraciones = [
 
 // Arrays de nombres, razas y profesiones de los personajes
 const nombres = ["Glorfindel", "William", "Geoffrey", "Eleanor", "Erestor", "Galadros", "Aerendil", "Tuckbrin", "Dorlak", "Zorgash", "Ferdin","Tharion", "Bryndis","Luzgri", "Aveline", "Lindir","Brandyla", "Grimbald","Vroth", "Ceredin"];
-const raza = ["Elfo", "Humano", "Humano", "Humano", "Elfo", "Halfling", "Elfo", "Elfo","Enano", "Goblin", "Mediano", "Humano", "Enano", "Goblin", "Humano", "Humano", "Mediano", "Enano", "Goblin", "humano"];
+const raza = ["Elfo", "Humano", "Humano", "Humano", "Elfo", "Mediano", "Elfo", "Elfo","Enano", "Goblin", "Mediano", "Humano", "Enano", "Goblin", "Humano", "Humano", "Mediano", "Enano", "Goblin", "humano"];
 
 // Array de profesiones con características base
 // Cada profesión tiene el formato [Nombre, Fuerza, Agilidad, Inteligencia, Carisma, [Combate, Conocimiento, Latrocinio, Magia, Sociales]]
@@ -124,16 +124,50 @@ function armas(){
     return [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion];
 };
 
-function equipadas(armaEsc, armaCor, armaLar, armaDis, armaCal, mun, razaHeroe, profesionMedieval ){
-    if (profesionMedieval == "Mago"){
-        AC = armaCal? "Cayado +1 ataque + 1 Ini":"";
-    } ///quede por acá
-}
+//////////// Está fallando el tema armas/////////////
+
+function equipadas(profesionMedieval ){
+    let [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion] = armas();
+    let escondida = armaEscondida == true ? "Cuchillo: Combate + 0":"";
+    let corta = armaCorta == true ? "Espada Corta: Combate + 1":"";
+    let larga = armaLarga == true ? "Hacha a 2 mano: Combate + 2":"";
+    let distancia = armaDistacia == true ? "Arco: Combate + 1":"";
+    let calidad = armaDeCalidad == true ? "Espada Larga: Combate +2 Iniciativa +1 " : "";
+    municion = armaDistacia == true ? municion : "";
+    if (profesionMedieval == "Caballero" || "Paladin" || "Guerrero" || "Noble" || "Esgrimista" ){
+        calidad = "Espada Larga: Combate +2 Iniciativa +1 ";
+        escondida = "Daga: Combate +0";
+        distancia = armaDistacia == true ? "Ballesta: Combate + 2":"";
+        larga = armaLarga == true ? "Espada a 2 mano: Combate + 2":"";
+    } else if ( profesionMedieval == "Clériga Guerrera" || "Mercenario"|| "Barbaro" || "Mercader Enano") {
+        corta = armaCor == "Masa de Armas: Combate +1";
+        distancia = razaHeroe == "Enano" && armaDistacia == true?"Ballesta: Combate + 2": "Resortera Combate -1";
+        calidad = "Hacha de Batalla: Combate +2 Iniciativa +1 ";
+    } else if (profesionMedieval == "Mago"){
+        larga = "Cayado: Combate +1 +1 hechizo de luz gratis";
+        distancia = "Anillo hechizado + 1 hechizo de ataque +0";
+        municion = "El anillo guarda 1 de magia para su hechizo, se puede recargar"
+    } else if (profesionMedieval == "Arquera" || "Pícaro" || "Aventurera" ){
+        larga = "";
+        distancia = armaDistacia == true ? "Arco de caza: Combate + 2 + 1 Iniciativa":"Arco: Combate + 1";
+        escondida = "Daga: Combate +0";
+        calidad = "Daga Curva: Combate +1 Iniciativa+1";
+    } else if (profesionMedieval == "Explorador" || "Cazador Goblin" || "Guardia Halfling") {
+        larga = armaLarga == "Lanza mano: Combate + 2";
+        distancia = armaDistacia == true ? "Arco Corto: Combate +1":"Arco: Combate +0";
+        corta = profesionMedieval != "Guardia Halfling" && armaCorta == true ? "Espada Corta: Combate + 1":"Garrote + Combate +0";
+    }
+    console.log([escondida, corta, larga, distancia, calidad, municion])
+    return[escondida, corta, larga, distancia, calidad, municion];
+}       
+
+
+/////////////armas ya renderiza pero hay fallos, arquera goblin con ballesta, mago con espada....
+
 
 // Función para crear un aventurero con todas sus características y habilidades
 function crearAventurero() {
     contador++; // Incrementa el contador global
-    let [armaEsc, armaCor, armaLar, armaDis, armaCal, mun] = armas();
     let razaHeroe = raza[contador - 1]; // Asigna la raza del aventurero
     let nombreHeroe = nombres[contador - 1]; // Asigna el nombre del aventurero
     let profesionMedieval = profesion[contador - 1]; // Asigna la profesión
@@ -151,9 +185,10 @@ function crearAventurero() {
     let agilidad = `${profesionMedieval[2] + sumaA}`;
     let inteligencia = `${profesionMedieval[3] + sumaI}`;
     let carisma = `${profesionMedieval[4] + sumaC}`;
+    [escondida, corta, larga, distancia, calidad, municion] = equipadas(profesionMedieval);
     
     // Genera el HTML de las profesiones, características y habilidades del aventurero
-    let profesionHeroeHTML = `<h2>${profesion[contador - 1][0]}</h2>`;
+    let profesionHeroeHTML = `<h3>Profesión ${profesion[contador - 1][0]}</h3>`;
     let nombreHTML = `<h3 id='${idPj}'>${nombreHeroe}</h3>`;
     let razaHTML = `<p>Raza: <b>${razaHeroe}</b></p>`;
     let caracteristicasHTML = 
@@ -176,15 +211,15 @@ function crearAventurero() {
     </p>`;
     
     let armasHTML = `<p class="armas">
-    <b>Armamento Inicial</b><br>
-    Cuchillo pequeño ${hCombate}<br>
-    Arma de puño ${hConocimiento}<br>
-    Arma de mano ${hLatrocinio}<br>
-    Arma Larga ${hMagia}<br>
-    Arma de Distancia${hSociales}<br>
-    Munición${hSociales}<br>
-
-</p>`;
+        <b>Armamento Inicial</b><br>
+        Arma Oculta: ${escondida}<br>
+        Arma Corta: ${corta}<br>
+        Arma Larga: ${larga}<br>
+        Arma de Distancia: ${distancia}<br>
+        Munición: ${municion}<br>
+        Arma Especial: ${calidad}
+        
+    </p>`;
     return [img, profesionHeroeHTML, razaHTML, nombreHTML, caracteristicasHTML, habilidadesHTML, armasHTML];
 }
 
@@ -195,15 +230,16 @@ const changeHidden = (number) => {
 
 let documentFragment = document.createDocumentFragment(); // Crea un fragmento de documento para insertar múltiples elementos de forma eficiente
 
-// Itera para generar 8 aventureros
+// Itera para generar 20 aventureros
 for (var i = 1; i <= 20; i++) {
     //let precioRandom = Math.round(Math.random()*10+30);
-    [img,profesionHeroeHTML,razaHTML,nombreHTML,caracteristicasHTML, habilidadesHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
+    [img,profesionHeroeHTML,razaHTML,nombreHTML,caracteristicasHTML, habilidadesHTML,armasHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
     let div = document.createElement("div");//creamos un contenedor en memoria
     div.setAttribute("tabindex", "0"); // Esto permite que el div reciba el foco
     div.addEventListener("click", ()=>changeHidden());
     div.classList.add(`flex-item`,`item-${i}`);//le sumamos clases como atributos
-    div.innerHTML = img + profesionHeroeHTML + razaHTML + nombreHTML + caracteristicasHTML + habilidadesHTML;//inserta elementos del array llave en el div antes creado.
+    console.log(profesionHeroeHTML);
+    div.innerHTML = img + profesionHeroeHTML + razaHTML + nombreHTML + caracteristicasHTML + habilidadesHTML + armasHTML;//inserta elementos del array llave en el div antes creado.
     // contenedor.innerHTML += div;
     documentFragment.appendChild(div);//agregamos el div como hijo del documentFragment
 }
