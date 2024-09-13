@@ -80,10 +80,10 @@ const caractRandom = () => {
 const habilidadesRandom = (raza, profesion) => {
     let sumaMagia;
     let restante;
-    if (raza == "Elfo") {
+    if (raza === "Elfo") {
         sumaMagia = 3;
         restante = 7;
-    } else if (profesion == "Clériga Guerrera" || "Paladin") {
+    } else if (profesion === "Clériga Guerrera" || profesion === "Paladin") {
         sumaMagia = 3;
         restante = 7;
     } else {
@@ -111,8 +111,6 @@ function armas(){
     return [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion];
 };
 
-//////////// Está fallando el tema armas/////////////
-
 function equipadas(profesionMedieval){
     let [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion] = armas();//inicia desestructurando armas()
     //console.log(profesionMedieval + " " + armaEscondida + " " +  armaCorta + " " +  armaLarga + " " +  armaDistacia + " " +  armaDeCalidad + " " +  municion)
@@ -123,7 +121,7 @@ function equipadas(profesionMedieval){
     let distancia = armaDistacia == true ? "Arco: Combate +1 ":"";
     let calidad = armaDeCalidad == true ? "Espada Larga: Combate +2 Iniciativa +1 " : "";
     municion = armaDistacia == true ? municion : "";
-    console.log(profesionMedieval + " " + escondida  + " " + corta +  + " " + larga + " " + distancia  + " " + calidad  + " " +  municion);
+    //console.log(profesionMedieval + " " + escondida  + " " + corta +  + " " + larga + " " + distancia  + " " + calidad  + " " +  municion);
 
     ////////////excepciones
     if (profesionMedieval === "Caballero" || profesionMedieval === "Paladin" || profesionMedieval === "Guerrero" || profesionMedieval === "Noble" || profesionMedieval === "Esgrimista" ){
