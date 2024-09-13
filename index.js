@@ -100,9 +100,10 @@ const habilidadesRandom = (raza, profesion) => {
     return [sumaComb, sumaCono, sumaLat, sumaMagia, sumaSoc];
 }
 
+///Le da cierto grado de azhar a la tenencia de armas medievales
 function armas(){
-    let armaEscondida = loTrae(4);
-    let armaCorta = loTrae(8);
+    let armaEscondida = loTrae(6);
+    let armaCorta = loTrae(10);
     let armaLarga = loTrae(3);
     let armaDistacia = loTrae(3);
     let armaDeCalidad = loTrae(2);
@@ -113,35 +114,40 @@ function armas(){
 //////////// Está fallando el tema armas/////////////
 
 function equipadas(profesionMedieval){
-    let [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion] = armas();
-    let escondida = armaEscondida == true ? "Cuchillo: Combate + 0":"";
-    let corta = armaCorta == true ? "Espada Corta: Combate + 1":"";
-    let larga = armaLarga == true ? "Hacha a 2 mano: Combate + 2":"";
-    let distancia = armaDistacia == true ? "Arco: Combate + 1":"";
+    let [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion] = armas();//inicia desestructurando armas()
+    //console.log(profesionMedieval + " " + armaEscondida + " " +  armaCorta + " " +  armaLarga + " " +  armaDistacia + " " +  armaDeCalidad + " " +  municion)
+    ////////casos estandar
+    let escondida = armaEscondida == true ? "Cuchillo: Combate +0 ":"";
+    let corta = armaCorta == true ? "Espada Corta: Combate +1 ":"";
+    let larga = armaLarga == true ? "Hacha a 2 manos: Combate +2 ":"";
+    let distancia = armaDistacia == true ? "Arco: Combate +1 ":"";
     let calidad = armaDeCalidad == true ? "Espada Larga: Combate +2 Iniciativa +1 " : "";
     municion = armaDistacia == true ? municion : "";
-    if (profesionMedieval == "Caballero" || "Paladin" || "Guerrero" || "Noble" || "Esgrimista" ){
+    console.log(profesionMedieval + " " + escondida  + " " + corta +  + " " + larga + " " + distancia  + " " + calidad  + " " +  municion);
+
+    ////////////excepciones
+    if (profesionMedieval === "Caballero" || profesionMedieval === "Paladin" || profesionMedieval === "Guerrero" || profesionMedieval === "Noble" || profesionMedieval === "Esgrimista" ){
         calidad = "Espada Larga: Combate +2 Iniciativa +1 ";
         escondida = "Daga: Combate +0";
         distancia = armaDistacia == true ? "Ballesta: Combate + 2":"";
-        larga = armaLarga == true ? "Espada a 2 mano: Combate + 2":"";
-    } else if ( profesionMedieval == "Clériga Guerrera" || "Mercenario"|| "Barbaro" || "Mercader Enano") {
-        corta = armaCor == "Masa de Armas: Combate +1";
-        distancia = razaHeroe == "Enano" && armaDistacia == true?"Ballesta: Combate + 2": "Resortera Combate -1";
+        larga = armaLarga == true ? "Espada a 2 manos: Combate + 2":"";
+    } else if ( profesionMedieval ===  "Clériga Guerrera" ||profesionMedieval ===  "Mercenario"|| profesionMedieval ===  "Barbaro" || profesionMedieval === "Mercader Enano") {
+        corta = armaCorta == "Masa de Armas: Combate +1";
+        distancia = armaDistacia == true ? "Ballesta: Combate + 2": "Resortera Combate -1";
         calidad = "Hacha de Batalla: Combate +2 Iniciativa +1 ";
-    } else if (profesionMedieval == "Mago"){
-        larga = "Cayado: Combate +1 +1 hechizo de luz gratis";
+    } else if (profesionMedieval ===  "Mago"){
+        larga = "Cayado: Combate +1, + un hechizo de luz gratis";
         distancia = "Anillo hechizado + 1 hechizo de ataque +0";
         municion = "El anillo guarda 1 de magia para su hechizo, se puede recargar"
-    } else if (profesionMedieval == "Arquera" || "Pícaro" || "Aventurera" ){
+    } else if (profesionMedieval === "Arquera" || profesionMedieval === "Pícaro" || profesionMedieval === "Aventurera" ){
         larga = "";
         distancia = armaDistacia == true ? "Arco de caza: Combate + 2 + 1 Iniciativa":"Arco: Combate + 1";
         escondida = "Daga: Combate +0";
-        calidad = "Daga Curva: Combate +1 Iniciativa+1";
-    } else if (profesionMedieval == "Explorador" || "Cazador Goblin" || "Guardia Halfling") {
-        larga = armaLarga == "Lanza mano: Combate + 2";
+        calidad = "Daga Curva: Combate +1 Iniciativa +1";
+    } else if (profesionMedieval === "Explorador" || profesionMedieval === "Cazador Goblin" || profesionMedieval === "Guardia Halfling") {
+        larga = armaLarga == true ? "Lanza: Combate + 2": "Baston de viajero ataque +0";
         distancia = armaDistacia == true ? "Arco Corto: Combate +1":"Arco: Combate +0";
-        corta = profesionMedieval != "Guardia Halfling" && armaCorta == true ? "Espada Corta: Combate + 1":"Garrote + Combate +0";
+        corta = armaCorta == true ? "Espada Corta: Combate + 1":"Garrote + Combate +0";
     }
     return[escondida, corta, larga, distancia, calidad, municion];
 }       
@@ -173,10 +179,6 @@ function crearAventurero() {
     hSociales += habilidadesAleatorias[4];
     //////////EQUIPO
     [escondida, corta, larga, distancia, calidad, municion] = equipadas(profesionMedieval);
-
-
-    console.log(profesionMedieval);
-
     /////////HTML
     let idPj = "Pj" + (contador - 1); // Asigna un ID al personaje
     let img = ilustraciones[contador - 1]; // Selecciona la ilustración correspondiente
