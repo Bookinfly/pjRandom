@@ -39,12 +39,13 @@ img {
     box-sizing: content-box;
     flex-grow: 1;
     margin: 20px;
-    max-width: 300px;
+    max-width: 600px;
     border: 2px solid var(--color-four);
     background-color: var(--color-two);
     overflow: hidden;
     object-fit: cover;
     padding: 1vh;
+    display: flex;
 }
 
 .flex-item:hover {
@@ -52,6 +53,8 @@ img {
     box-shadow: 0 0 13px #31a274;
     transition-duration: 0.5s;
     padding: 3vh;
+    max-width: none;
+    width: 80%;
 }
 
 .flex-item:focus {
@@ -126,5 +129,22 @@ footer{
 .armas{
     font-size: 10px;
 }
+
+.oculto{
+    display: none;
+}
+
+.pj:focus .oculto {
+    display: flex;
+}
+
+.separador {
+    margin: 10px;
+    padding: 3px;
+    margin: 10px;
+    background-color: #ebe3e0;
+}
+
+
 
 
