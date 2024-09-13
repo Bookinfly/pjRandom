@@ -76,20 +76,6 @@ const caractRandom = () => {
     return [sumaF, sumaA, sumaI, sumaC];
 }
 
-// // Función para generar números aleatorios y distribuir características base
-// const caractRandom = () => {
-//     let sumaF = parseInt(Math.random() * 4) + 1; // Entre 1 y 4 para Fuerza
-//     let sumaA = parseInt(Math.random() * 4) + 1; // Entre 1 y 4 para Agilidad
-//     let restante = 8 - sumaA - sumaF; // Actualiza números restantes para distribuir
-//     let restanteUtilizable = restante <= 4 ? restante : 4; // Asegura que ningún valor supere 4
-//     let sumaI = (restante > 0) ? parseInt(Math.random() * restanteUtilizable + 1) : 0; // Asigna a Inteligencia
-//     restante = 8 - sumaA - sumaF - sumaI; // Actualiza restantes
-//     restanteUtilizable = restante <= 4 ? restante : 4; // Actualiza para el último valor
-//     let sumaC = restanteUtilizable; // Carisma recibe lo restante
-//     if (restante > 0) sumaI++; // Si sobra 1, lo sumamos a Inteligencia
-//     return [sumaF, sumaA, sumaI, sumaC];
-// }
-
 // Función para generar habilidades aleatorias basadas en raza y profesión
 const habilidadesRandom = (raza, profesion) => {
     let sumaMagia;
@@ -126,7 +112,7 @@ function armas(){
 
 //////////// Está fallando el tema armas/////////////
 
-function equipadas(profesionMedieval ){
+function equipadas(profesionMedieval){
     let [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion] = armas();
     let escondida = armaEscondida == true ? "Cuchillo: Combate + 0":"";
     let corta = armaCorta == true ? "Espada Corta: Combate + 1":"";
@@ -157,7 +143,6 @@ function equipadas(profesionMedieval ){
         distancia = armaDistacia == true ? "Arco Corto: Combate +1":"Arco: Combate +0";
         corta = profesionMedieval != "Guardia Halfling" && armaCorta == true ? "Espada Corta: Combate + 1":"Garrote + Combate +0";
     }
-    console.log([escondida, corta, larga, distancia, calidad, municion])
     return[escondida, corta, larga, distancia, calidad, municion];
 }       
 
@@ -168,25 +153,33 @@ function equipadas(profesionMedieval ){
 // Función para crear un aventurero con todas sus características y habilidades
 function crearAventurero() {
     contador++; // Incrementa el contador global
+    /////////DATOS
     let razaHeroe = raza[contador - 1]; // Asigna la raza del aventurero
     let nombreHeroe = nombres[contador - 1]; // Asigna el nombre del aventurero
-    let profesionMedieval = profesion[contador - 1]; // Asigna la profesión
-    let [hCombate, hConocimiento, hLatrocinio, hMagia, hSociales] = profesionMedieval[5]; // Extrae las habilidades base de la profesión
-    let habilidadesAleatorias = habilidadesRandom(razaHeroe, profesionMedieval[0]); // Genera habilidades adicionales
+    let profesionMedieval = profesion[contador -1][0]
+    ///////////CARACTERISTICAS
+    let [sumaF, sumaA, sumaI, sumaC] = caractRandom(); // Genera características aleatorias
+    let fuerza = `${profesion[contador-1][1] + sumaF}`;
+    let agilidad = `${profesion[contador-1][2] + sumaA}`;
+    let inteligencia = `${profesion[contador-1][3] + sumaI}`;
+    let carisma = `${profesion[contador-1][4] + sumaC}`;
+    ///////////HABILIDADES
+    let [hCombate, hConocimiento, hLatrocinio, hMagia, hSociales] = profesion[contador -1][5]; // Extrae las habilidades base de la profesión
+    let habilidadesAleatorias = habilidadesRandom(razaHeroe, profesionMedieval); // Genera habilidades adicionales
     hCombate += habilidadesAleatorias[0];
     hConocimiento += habilidadesAleatorias[1];
     hLatrocinio += habilidadesAleatorias[2];
     hMagia += habilidadesAleatorias[3];
     hSociales += habilidadesAleatorias[4];
+    //////////EQUIPO
+    [escondida, corta, larga, distancia, calidad, municion] = equipadas(profesionMedieval);
+
+
+    console.log(profesionMedieval);
+
+    /////////HTML
     let idPj = "Pj" + (contador - 1); // Asigna un ID al personaje
     let img = ilustraciones[contador - 1]; // Selecciona la ilustración correspondiente
-    let [sumaF, sumaA, sumaI, sumaC] = caractRandom(); // Genera características aleatorias
-    let fuerza = `${profesionMedieval[1] + sumaF}`;
-    let agilidad = `${profesionMedieval[2] + sumaA}`;
-    let inteligencia = `${profesionMedieval[3] + sumaI}`;
-    let carisma = `${profesionMedieval[4] + sumaC}`;
-    [escondida, corta, larga, distancia, calidad, municion] = equipadas(profesionMedieval);
-    
     // Genera el HTML de las profesiones, características y habilidades del aventurero
     let profesionHeroeHTML = `<h3>Profesión ${profesion[contador - 1][0]}</h3>`;
     let nombreHTML = `<h3 id='${idPj}'>${nombreHeroe}</h3>`;
@@ -200,7 +193,6 @@ function crearAventurero() {
         Carisma ${carisma}<br>
         <b class="pv">Puntos de Vida ${fuerza*3}</b>
     </p>`;
-
     let habilidadesHTML = `<p>
         <b>Habilidades</b><br>
         Combate ${hCombate}<br>
@@ -209,7 +201,6 @@ function crearAventurero() {
         Magia ${hMagia}<br>
         Sociales ${hSociales}<br>
     </p>`;
-    
     let armasHTML = `<p class="armas">
         <b>Armamento Inicial</b><br>
         Arma Oculta: ${escondida}<br>
@@ -217,8 +208,7 @@ function crearAventurero() {
         Arma Larga: ${larga}<br>
         Arma de Distancia: ${distancia}<br>
         Munición: ${municion}<br>
-        Arma Especial: ${calidad}
-        
+        Arma Especial: ${calidad}<br>   
     </p>`;
     return [img, profesionHeroeHTML, razaHTML, nombreHTML, caracteristicasHTML, habilidadesHTML, armasHTML];
 }
@@ -238,7 +228,6 @@ for (var i = 1; i <= 20; i++) {
     div.setAttribute("tabindex", "0"); // Esto permite que el div reciba el foco
     div.addEventListener("click", ()=>changeHidden());
     div.classList.add(`flex-item`,`item-${i}`);//le sumamos clases como atributos
-    console.log(profesionHeroeHTML);
     div.innerHTML = img + profesionHeroeHTML + razaHTML + nombreHTML + caracteristicasHTML + habilidadesHTML + armasHTML;//inserta elementos del array llave en el div antes creado.
     // contenedor.innerHTML += div;
     documentFragment.appendChild(div);//agregamos el div como hijo del documentFragment
