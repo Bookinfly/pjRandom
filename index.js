@@ -105,7 +105,7 @@ function equipo(){
     let armaEscondida = loTrae(6);
     let armaCorta = loTrae(10);
     let armaLarga = loTrae(3);
-    let armaDistacia = loTrae(3);
+    let armaDistancia = loTrae(3);
     let armaDeCalidad = loTrae(2);
     let municion = parseInt(Math.random() * 30);
     let armadura = loTrae(3);
@@ -118,19 +118,18 @@ function equipo(){
     let provisiones = parseInt(Math.random() * 30);
     let cuerda = loTrae(3);
     let equipoProf = loTrae(3);
-    return [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion, armadura, casco, escudo, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf];
+    return [armaEscondida, armaCorta, armaLarga, armaDistancia, armaDeCalidad, municion, armadura, casco, escudo, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf];
 };
 
 function equipadas(profesionMedieval){
-    let [armaEscondida, armaCorta, armaLarga, armaDistacia, armaDeCalidad, municion, armadura, casco, escudo, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf] = equipo();//inicia desestructurando equipo()
-    //console.log(profesionMedieval + " " + armaEscondida + " " +  armaCorta + " " +  armaLarga + " " +  armaDistacia + " " +  armaDeCalidad + " " +  municion)
-    ////////casos estandar
+    let [armaEscondida, armaCorta, armaLarga, armaDistancia, armaDeCalidad, municion, armadura, casco, escudo, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf] = equipo();//inicia desestructurando equipo(
+
     let escondida = armaEscondida == true ? "Cuchillo: Combate +0 ":"";
     let corta = armaCorta == true ? "Espada Corta: Combate +1 ":"";
     let larga = armaLarga == true ? "Hacha a 2 manos: Combate +2 ":"";
-    let distancia = armaDistacia == true ? "Arco: Combate +1 ":"";
+    let distancia = armaDistancia == true ? "Arco: Combate +1 ":"";
     let calidad = armaDeCalidad == true ? "Espada Larga: Combate +2 Iniciativa +1 " : "";
-    municion = armaDistacia == true ? municion : "";
+    municion = armaDistancia == true ? municion : "";
     escudo = escudo == true ? "Escudo +1 Defensa": "";
     casco = casco == true ? "casco +1 Defensa": "";
     armadura = armadura == true ? "Armadura ligera +1 Defensa": "";
@@ -146,13 +145,13 @@ function equipadas(profesionMedieval){
     if (profesionMedieval === "Caballero" || profesionMedieval === "Paladin" || profesionMedieval === "Guerrero" || profesionMedieval === "Noble" || profesionMedieval === "Esgrimista" ){
         calidad = "Espada Larga: Combate +2 Iniciativa +1 ";
         escondida = "Daga: Combate +0";
-        distancia = armaDistacia == true ? "Ballesta: Combate + 2":"";
+        distancia = armaDistancia == true ? "Ballesta: Combate + 2":"";
         larga = armaLarga == true ? "Espada a 2 manos: Combate + 2":"";
         armadura = armadura == true ? "Armadura Pesada +3 Defensa": "Armadura de Cota +2 Defensa";
         equipoProf = equipoProf == true ? "Piedra de afilar, equipo de sutura, sello familiar, papiro, pluma y tinta":"";
     } else if ( profesionMedieval ===  "Clériga Guerrera" ||profesionMedieval ===  "Mercenario"|| profesionMedieval ===  "Barbaro" || profesionMedieval === "Mercader Enano") {
-        corta = armaCorta == "Masa de Armas: Combate +1";
-        distancia = armaDistacia == true ? "Ballesta: Combate + 2": "Resortera Combate -1";
+        corta = armaCorta == true ? "Masa de Armas: Combate +1":"";
+        distancia = armaDistancia == true ? "Ballesta: Combate + 2": "Resortera Combate -1";
         calidad = "Hacha de Batalla: Combate +2 Iniciativa +1 ";
         armadura = armadura == true ? "Armadura de Cota +2 Defensa": "Armadura ligera +1 Defensa";
     } else if (profesionMedieval ===  "Mago"){
@@ -165,13 +164,13 @@ function equipadas(profesionMedieval){
         equipoProf = equipoProf == true ? "Bolsitas con hiervas, unguentos, frascos con elixires y toda clase de polvos":"";
     } else if (profesionMedieval === "Arquera" || profesionMedieval === "Pícaro" || profesionMedieval === "Aventurera" ){
         larga = "";
-        distancia = armaDistacia == true ? "Arco de caza: Combate + 2 + 1 Iniciativa":"Arco: Combate + 1";
+        distancia = armaDistancia == true ? "Arco de caza: Combate + 2 + 1 Iniciativa":"Arco: Combate + 1";
         escondida = "Daga: Combate +0";
         calidad = "Daga Curva: Combate +1 Iniciativa +1";
         equipoProf = equipoProf == true ? "Ganzúas, cuerda y gancho":"";
     } else if (profesionMedieval === "Explorador" || profesionMedieval === "Cazador Goblin" || profesionMedieval === "Guardia Halfling") {
         larga = armaLarga == true ? "Lanza: Combate + 2": "Baston de viajero ataque +0";
-        distancia = armaDistacia == true ? "Arco Corto: Combate +1":"Arco: Combate +0";
+        distancia = armaDistancia == true ? "Arco Corto: Combate +1":"Arco: Combate +0";
         corta = armaCorta == true ? "Espada Corta: Combate + 1":"Garrote + Combate +0";
         armadura = armadura == true ? "Armadura ligera de calidad +2 Defensa": "Armadura ligera +1 Defensa";
     } else {
@@ -210,6 +209,7 @@ function crearAventurero() {
     hSociales += habilidadesAleatorias[4];
     //////////EQUIPO
     [escondida, corta, larga, distancia, calidad, municion, escudo, casco, armadura, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf] = equipadas(profesionMedieval);
+    console.log(equipoProf)
     /////////HTML
     let idPj = "Pj" + (contador - 1); // Asigna un ID al personaje
     let img = ilustraciones[contador - 1]; // Selecciona la ilustración correspondiente
