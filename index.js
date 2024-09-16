@@ -214,9 +214,14 @@ function crearAventurero() {
     let idPj = "Pj" + (contador - 1); // Asigna un ID al personaje
     let img = ilustraciones[contador - 1]; // Selecciona la ilustración correspondiente
     // Genera el HTML de las profesiones, características y habilidades del aventurero
-    let profesionHeroeHTML = `<div class="separador><h3 class="separador>Profesión ${profesion[contador - 1][0]}</h3><br></div>`;
-    let nombreHTML = `<div class="separador><h3 class="separador id='${idPj}'>${nombreHeroe}</h3><br></div>`;
-    let razaHTML = `<div class="separador><p>Raza: <b>${razaHeroe}</b></p></div>`;
+    // let profesionHeroeHTML = ;
+    // let nombreHTML = ;
+    // let razaHTML = ;
+    let pjDatosHTML =
+    `<h3>Profesión: <strong>${profesion[contador - 1][0]}</strong></h3>
+    <h3 id='${idPj}'>Nombre: <strong>${nombreHeroe}</strong></h3>
+    <p>Raza: <strong>${razaHeroe}</strong></p>`;    
+    /////////////////////////
     let caracteristicasHTML = 
     `<div class="separador"><p>
         <b>Características</b><br>
@@ -261,7 +266,7 @@ function crearAventurero() {
         EquipoProf: ${equipoProf}<br>
         Liquido: Llevas on odre de agua<br></p>
     </div>`;
-    return [img, profesionHeroeHTML, razaHTML, nombreHTML, caracteristicasHTML, habilidadesHTML, armasHTML, armaduraHTML, equipoHTML];
+    return [img, pjDatosHTML, caracteristicasHTML, habilidadesHTML, armasHTML, armaduraHTML, equipoHTML];
 }
 
 // Función que cambia el valor oculto (hidden) del campo del formulario
@@ -274,13 +279,13 @@ let documentFragment = document.createDocumentFragment(); // Crea un fragmento d
 // Itera para generar 20 aventureros
 for (var i = 1; i <= 20; i++) {
     //let precioRandom = Math.round(Math.random()*10+30);
-    [img,profesionHeroeHTML,razaHTML,nombreHTML,caracteristicasHTML, habilidadesHTML,armasHTML,armaduraHTML, equipoHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
+    [img,pjDatosHTML ,caracteristicasHTML, habilidadesHTML,armasHTML,armaduraHTML, equipoHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
     let div = document.createElement("div");//creamos un contenedor en memoria
     div.classList.add('pj');//clase para dejar de ocultar elementos
     div.setAttribute("tabindex", "0"); // Esto permite que el div reciba el foco
     div.addEventListener("click", ()=>changeHidden());
     div.classList.add(`flex-item`,`item-${i}`);//le sumamos clases como atributos
-    div.innerHTML = img + profesionHeroeHTML + razaHTML + nombreHTML + caracteristicasHTML + habilidadesHTML + armasHTML + armaduraHTML + equipoHTML;//inserta elementos del array llave en el div antes creado.
+    div.innerHTML = img + pjDatosHTML + caracteristicasHTML + habilidadesHTML + armasHTML + armaduraHTML + equipoHTML;//inserta elementos del array llave en el div antes creado.
     // contenedor.innerHTML += div;
     documentFragment.appendChild(div);//agregamos el div como hijo del documentFragment
 }
