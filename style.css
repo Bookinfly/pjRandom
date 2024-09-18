@@ -104,6 +104,11 @@ h5 {
     background-color: #04BF9D;
 }
 
+h6 {
+    width: 100%;
+    font-size: 1.3em;
+}
+
 p b {
     color: var(--color-one);
     margin-bottom: 10px;
@@ -130,9 +135,13 @@ input[type="submit"]{
 }
 
 footer{
-    background-color: var(--color-two);
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--color-four);
+    /* box-shadow:  -5px -5px 10px var(--color-four); */
     width: 100%;
-    height: 30vh;
+    gap: 10px;
+    height: 50vh;
 }
 
 .banner {
@@ -168,8 +177,67 @@ footer{
     margin-left: 30px;
 }
 
+.footerElement {
+    display: inline-block;
+    max-width: 33vw;
+    min-width: 25vw;
+    max-height: 20vh;
+    padding: 20px;
+    color: #253659;
+    font-size: 1em;
+    text-decoration: none;
+    font-weight: 600;
+}
 
+.footerElement p {
+    white-space: normal; /* Permite que el texto pase a una nueva línea si es necesario */
+    word-wrap: break-word; /* Evita que palabras largas sobrepasen el contenedor */
+}
 
+@media (max-width: 1010px) {
+    /* Estilos que se aplicarán cuando el ancho de la pantalla sea igual o menor a 768px */
+    .footerElement p {
+    display: none;
+    }
 
+    .footerElement {
+        min-width: 40vh;
+        max-width: 100vh;
+    }
+}
 
+.butonLink {
+    display: inline-block;
+    color: #F28157;
+    padding: 15px;
+    background-color: #253659;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    text-decoration: none;
+    margin: 5px;
 
+}
+
+.butonLink:hover {
+    color: var(--color-two);
+    padding: 17px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.logo {
+    color: var(--color-one);
+    font-size: 2.5em;
+}
+
+.logo:hover {
+    transition: 0.5s;
+    color: var(--color-two);
+    font-size: 2.8em;
+}
