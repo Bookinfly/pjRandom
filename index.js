@@ -214,59 +214,56 @@ function crearAventurero() {
     let idPj = "Pj" + (contador - 1); // Asigna un ID al personaje
     let img = ilustraciones[contador - 1]; // Selecciona la ilustración correspondiente
     // Genera el HTML de las profesiones, características y habilidades del aventurero
-    // let profesionHeroeHTML = ;
-    // let nombreHTML = ;
-    // let razaHTML = ;
     let pjDatosHTML =
-    `<h3>Profesión: <strong>${profesion[contador - 1][0]}</strong></h3>
-    <h3 id='${idPj}'>Nombre: <strong>${nombreHeroe}</strong></h3>
-    <p>Raza: <strong>${razaHeroe}</strong></p>`;    
-    /////////////////////////
+    `<div>
+    ${img}<br><div class="pjData">
+    <h3><strong >Profesión: ${profesion[contador - 1][0]}</strong></h3>
+    <h4 id='${idPj}'>Nombre: <strong>${nombreHeroe}</strong></h4>
+    <p><strong >Raza: ${razaHeroe}</strong></p></div></div>`;    
     let caracteristicasHTML = 
-    `<div class="separador"><p>
-        <b>Características</b><br>
-        Fuerza ${fuerza}<br>
+    `<div class="separador">
+        <h5><strong>Características</strong></h5><br><p>
+        <strong>Fuerza ${fuerza}<br>
         Agilidad ${agilidad}<br>
         Inteligencia ${inteligencia}<br>
         Carisma ${carisma}<br>
-        <b class="pv">Puntos de Vida ${fuerza*3}</b></p>
-    </div>`;
-    let habilidadesHTML = `<div class="oculto separador">
-        <p>
-        <b>Habilidades</b><br>
+        <strong class="pv">Puntos de Vida ${fuerza*3}</strong></p>
+        <br>
+        <p/>
+        <h5><strong>Habilidades</strong></h5><br><p></p>
         Combate ${hCombate}<br>
         Conocimiento ${hConocimiento}<br>
         Latrocinio ${hLatrocinio}<br>
         Magia ${hMagia}<br>
-        Sociales ${hSociales}<br></p>
+        Sociales ${hSociales}<br></p></strong>
     </div>`;
     let armasHTML = `<div class="armas oculto separador">
-        <p><b>Armamento</b><br>
-        Arma Oculta: ${escondida}<br>
-        Arma Corta: ${corta}<br>
-        Arma Larga: ${larga}<br>
-        Arma de Distancia: ${distancia}<br>
-        Munición: ${municion}<br>
-        Arma Especial: ${calidad}<br></p>  
+        <h5><strong>Armamento</strong></h5><br><p>
+        <strong>Arma Oculta:</strong> ${escondida}<br>
+        <strong>Arma Corta:</strong> ${corta}<br>
+        <strong>Arma Larga:</strong> ${larga}<br>
+        <strong>Arma de Distancia:</strong> ${distancia}<br>
+        <strong>Munición:</strong> ${municion}<br>
+        <strong>Arma Especial:</strong> ${calidad}<br></p>  
     </div>`;
     let armaduraHTML = `<div class="armas oculto separador">
-        <p><b>Protección</b><br>
-        Casco: ${casco}<br>
-        Armadura: ${armadura}<br>
-        Escudo: ${escudo}<br></p>
+        <h5><strong>Protección</strong></h5><br><p>
+        <strong>Casco:</strong> ${casco}<br>
+        <strong>Armadura:</strong> ${armadura}<br>
+        <strong>Escudo:</strong> ${escudo}<br></p>
     </div>`;
     let equipoHTML = `<div class="armas oculto separador">
-        <p><b>Equipo</b><br>
-        Tesoro: ${tesoro}<br>
-        Mochila: ${mochila}<br>
-        Muda: ${muda} <br>
-        Capa: ${capa}<br>
-        Provisiones: ${provisiones}<br>
-        Cuerda: ${cuerda}<br>
-        EquipoProf: ${equipoProf}<br>
-        Liquido: Llevas on odre de agua<br></p>
+        <h5><strong>Equipo</strong></h5><br>
+        <p><strong>Tesoro:</strong> ${tesoro}<br>
+        <strong>Mochila:</strong> ${mochila}<br>
+        <strong>Muda:</strong> ${muda} <br>
+        <strong>Capa:</strong> ${capa}<br>
+        <strong>Provisiones:</strong> ${provisiones}<br>
+        <strong>Cuerda:</strong> ${cuerda}<br>
+        <strong>Equipo Profesional:</strong> ${equipoProf}<br>
+        <strong>Liquido:</strong> Llevas on odre de agua<br></p>
     </div>`;
-    return [img, pjDatosHTML, caracteristicasHTML, habilidadesHTML, armasHTML, armaduraHTML, equipoHTML];
+    return [pjDatosHTML, caracteristicasHTML, armasHTML, armaduraHTML, equipoHTML];
 }
 
 // Función que cambia el valor oculto (hidden) del campo del formulario
@@ -279,13 +276,13 @@ let documentFragment = document.createDocumentFragment(); // Crea un fragmento d
 // Itera para generar 20 aventureros
 for (var i = 1; i <= 20; i++) {
     //let precioRandom = Math.round(Math.random()*10+30);
-    [img,pjDatosHTML ,caracteristicasHTML, habilidadesHTML,armasHTML,armaduraHTML, equipoHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
+    [pjDatosHTML ,caracteristicasHTML,armasHTML,armaduraHTML, equipoHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
     let div = document.createElement("div");//creamos un contenedor en memoria
     div.classList.add('pj');//clase para dejar de ocultar elementos
     div.setAttribute("tabindex", "0"); // Esto permite que el div reciba el foco
     div.addEventListener("click", ()=>changeHidden());
     div.classList.add(`flex-item`,`item-${i}`);//le sumamos clases como atributos
-    div.innerHTML = img + pjDatosHTML + caracteristicasHTML + habilidadesHTML + armasHTML + armaduraHTML + equipoHTML;//inserta elementos del array llave en el div antes creado.
+    div.innerHTML = pjDatosHTML + caracteristicasHTML + armasHTML + armaduraHTML + equipoHTML;//inserta elementos del array llave en el div antes creado.
     // contenedor.innerHTML += div;
     documentFragment.appendChild(div);//agregamos el div como hijo del documentFragment
 }
