@@ -54,7 +54,7 @@ img {
 .flex-item:hover {
     border-color: var(--color-two);
     box-shadow: 0 0 13px #31a274;
-    transition-duration: 2s;
+    transition-duration: 0.2s;
 }
 
 .flex-item:focus {

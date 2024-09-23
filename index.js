@@ -298,7 +298,7 @@ contenedor.appendChild(documentFragment); //agregamos el documenFragment como hi
 for (i = 0; i <= 19; i++) {
     let ident = "Pj" + i;
     let card = document.getElementById(ident);
-    card.addEventListener("click", function(){// Función que cambia el valor oculto (hidden) del campo del formulario
+    card.addEventListener("focus", function(){// Función que cambia el valor oculto (hidden) del campo del formulario
         document.querySelector(".key-data").value = this.id;
         console.log(document.querySelector(".key-data").value)
     } )
