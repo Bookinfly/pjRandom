@@ -70,6 +70,34 @@ img {
     width: 80%;
 }
 
+#descargarPDF {
+    display: none;
+    color: var(--color-one);
+    padding: 15px;
+    background-color: var(--color-four);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    text-decoration: none;
+    margin: 5px;
+    font-weight: bolder;
+    margin: auto;
+    width: 40%;
+}
+
+#descargarPDF:hover {
+    background-color: var(--color-three);
+    padding: 20px;
+    transition: 1s;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+}
+
+
 h1 {
     margin: 15px;
     font-size: 4em;

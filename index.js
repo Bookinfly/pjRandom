@@ -1,5 +1,8 @@
 const contenedor = document.querySelector(".flex-container"); // Selecciona el contenedor con la clase "flex-container"
 let contador = 0;
+let botonDescarga = document.getElementById("#descargarPDF");
+
+
 
 // Array de imágenes de personajes con clases de imagen asignadas
 const ilustraciones = [
@@ -300,6 +303,8 @@ for (i = 0; i <= 19; i++) {
     let card = document.getElementById(ident);
     card.addEventListener("focus", function(){// Función que cambia el valor oculto (hidden) del campo del formulario
         document.querySelector(".key-data").value = this.id;
-        console.log(document.querySelector(".key-data").value)
+        console.log(document.querySelector(".key-data").value);
+        document.getElementById("descargarPDF").style.display = "block";///hacemos visible el boton de descarga
     } )
 }
+
