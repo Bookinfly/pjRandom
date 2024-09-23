@@ -308,3 +308,26 @@ for (i = 0; i <= 19; i++) {
     } )
 }
 
+document.getElementById("descargarPDF").addEventListener("click", ()=>{
+    let seleccionado = document.getElementById("select-id").value;
+    // console.log("el id a descargar es " + seleccionado)
+    const cardElement = document.getElementById(seleccionado).innerHTML;
+    // console.log(cardElement)
+    const newPage = window.open('', '_blank');
+    newPage.document.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pj Seleccionado</title>
+    <link rel="stylesheet" href="stylePj.css">
+</head>
+<body>
+<main >
+        <div class="flex-container">${cardElement}</div>
+</main>
+</body>
+</html>`);
+});
+
+
