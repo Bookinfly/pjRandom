@@ -1,7 +1,5 @@
 const contenedor = document.querySelector(".flex-container"); // Selecciona el contenedor con la clase "flex-container"
 let contador = 0;
-let boton = document.querySelector(".send-button"); // Selecciona el botón con la clase "send-button"
-let valorAntiguo = boton.value; // Guarda el valor actual del botón
 
 // Array de imágenes de personajes con clases de imagen asignadas
 const ilustraciones = [
@@ -55,6 +53,21 @@ const profesion = [
     ["Cazador Goblin", 3, 3, 1, 1, [4, 2, 3, 0, 1]], 
     ["Paladin", 3, 2, 1, 2, [4, 2, 1, 2, 1]], 
 ];
+
+///////////////////////////añadido para la librería de descargar como PDF siguiendo tutorial
+// document.getElementById("descargarPDF").addEventListener('click', function() {
+//     const selectedCardId = "id-de-la-card-seleccionada"; // Aquí debes obtener el ID dinámicamente
+//     const selectedCard = document.getElementById(selectedCardId);
+
+//     if (selectedCard) {
+//         // Aquí iría la lógica para generar el PDF, que añadiremos en los próximos pasos
+//         console.log('Card seleccionada: ', selectedCard);
+//     } else {
+//         console.error('No se encontró la card seleccionada');
+//         }
+// })
+
+///////////////////////////
 
 function loTrae(chances) {
     let equipado = parseInt(Math.random() * chances) ? true : false;
@@ -139,7 +152,6 @@ function equipadas(profesionMedieval){
     capa = capa == true ? "Capa de viajero con capucha":"";
     provisiones = `Provisiones de viaje para ${provisiones} días`
     cuerda = cuerda == true ? "Una cuerda, ninguna aventura debería comenzar sín una":"";    
-    //console.log(profesionMedieval + " " + escondida  + " " + corta +  + " " + larga + " " + distancia  + " " + calidad  + " " +  municion);
 
     ////////////excepciones
     if (profesionMedieval === "Caballero" || profesionMedieval === "Paladin" || profesionMedieval === "Guerrero" || profesionMedieval === "Noble" || profesionMedieval === "Esgrimista" ){
@@ -182,10 +194,6 @@ function equipadas(profesionMedieval){
     return[escondida, corta, larga, distancia, calidad, municion, escudo, casco, armadura, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf];
 }       
 
-
-/////////////armas ya renderiza pero hay fallos, arquera goblin con ballesta, mago con espada....
-
-
 // Función para crear un aventurero con todas sus características y habilidades
 function crearAventurero() {
     contador++; // Incrementa el contador global
@@ -209,9 +217,8 @@ function crearAventurero() {
     hSociales += habilidadesAleatorias[4];
     //////////EQUIPO
     [escondida, corta, larga, distancia, calidad, municion, escudo, casco, armadura, tesoro, mochila, muda, capa, provisiones, cuerda, equipoProf] = equipadas(profesionMedieval);
-    console.log(equipoProf)
     /////////HTML
-    let idPj = "Pj" + (contador - 1); // Asigna un ID al personaje
+    let idPj = "Pj" + (contador - 1); // crea un ID al personaje
     let img = ilustraciones[contador - 1]; // Selecciona la ilustración correspondiente
     // Genera el HTML de las profesiones, características y habilidades del aventurero
     let pjDatosHTML =
@@ -263,12 +270,7 @@ function crearAventurero() {
         <strong>Equipo Profesional:</strong> ${equipoProf}<br>
         <strong>Liquido:</strong> Llevas on odre de agua<br></p>
     </div>`;
-    return [pjDatosHTML, caracteristicasHTML, armasHTML, armaduraHTML, equipoHTML];
-}
-
-// Función que cambia el valor oculto (hidden) del campo del formulario
-const changeHidden = (number) => {
-    document.querySelector(".key-data").value = number;
+    return [pjDatosHTML, caracteristicasHTML, armasHTML, armaduraHTML, equipoHTML, idPj];
 }
 
 let documentFragment = document.createDocumentFragment(); // Crea un fragmento de documento para insertar múltiples elementos de forma eficiente
@@ -276,15 +278,28 @@ let documentFragment = document.createDocumentFragment(); // Crea un fragmento d
 // Itera para generar 20 aventureros
 for (var i = 1; i <= 20; i++) {
     //let precioRandom = Math.round(Math.random()*10+30);
-    [pjDatosHTML ,caracteristicasHTML,armasHTML,armaduraHTML, equipoHTML] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
+    [pjDatosHTML ,caracteristicasHTML,armasHTML,armaduraHTML, equipoHTML, idPj] = crearAventurero();//invova función crear llave, inserta datos con template literals, la iteración se vuelve el nombre
+    //console.log("verificación " + idPj);
+////////////
+//si agrego el escuchador de evento y paso el idPj como parametro hace cosas raras, si es global sigue sumando, sino  cuando quiero usar destructuring lo leé en el console.log, pero no para pasarlo por parametro. Voy a hacerlo por fuera.
+/////////
     let div = document.createElement("div");//creamos un contenedor en memoria
+    div.setAttribute('id', idPj);
     div.classList.add('pj');//clase para dejar de ocultar elementos
     div.setAttribute("tabindex", "0"); // Esto permite que el div reciba el foco
-    div.addEventListener("click", ()=>changeHidden());
     div.classList.add(`flex-item`,`item-${i}`);//le sumamos clases como atributos
     div.innerHTML = pjDatosHTML + caracteristicasHTML + armasHTML + armaduraHTML + equipoHTML;//inserta elementos del array llave en el div antes creado.
-    // contenedor.innerHTML += div;
     documentFragment.appendChild(div);//agregamos el div como hijo del documentFragment
 }
 
-contenedor.appendChild(documentFragment); //agregamos el documenFragment como hijo de contenedor (ver primera variable)
+contenedor.appendChild(documentFragment); //agregamos el documenFragment como hijo de contenedor (ver primera variable);
+
+//////////addEventListener (podría seleccionar todos por clase y creo que consumiría menos recursos, queda para el backlog)
+for (i = 0; i <= 19; i++) {
+    let ident = "Pj" + i;
+    let card = document.getElementById(ident);
+    card.addEventListener("click", function(){// Función que cambia el valor oculto (hidden) del campo del formulario
+        document.querySelector(".key-data").value = this.id;
+        console.log(document.querySelector(".key-data").value)
+    } )
+}
