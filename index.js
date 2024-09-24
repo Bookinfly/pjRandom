@@ -310,6 +310,9 @@ for (i = 0; i <= 19; i++) {
         document.querySelector(".key-data").value = this.id;
         console.log(document.querySelector(".key-data").value);
         document.getElementById("descargarPDF").style.display = "block";///hacemos visible el boton de descarga
+        card.scrollIntoView({
+            behavior: "smooth",  // Animación suave
+            block: "center" })     // Alinea la card en el centro de la pantalla
     } )
 }
 
