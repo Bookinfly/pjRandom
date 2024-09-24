@@ -228,24 +228,29 @@ function crearAventurero() {
     `<div>
     ${img}<br><div class="pjData">
     <h3><strong >Profesión: ${profesion[contador - 1][0]}</strong></h3>
-    <h4 id='${idPj}'>Nombre: <strong>${nombreHeroe}</strong></h4>
+    <h4 id='${idPj}'>Nombre: ${nombreHeroe}</h4>
     <p><strong >Raza: ${razaHeroe}</strong></p></div></div>`;    
     let caracteristicasHTML = 
     `<div class="separador">
+        <div>
         <h5><strong>Características</strong></h5><br><p>
         <strong>Fuerza ${fuerza}<br>
         Agilidad ${agilidad}<br>
         Inteligencia ${inteligencia}<br>
         Carisma ${carisma}<br>
         <strong class="pv">Puntos de Vida ${fuerza*3}</strong></p>
-        <br>
+        </div>
         <p/>
+        <br>
+        <br>
+        <div>
         <h5><strong>Habilidades</strong></h5><br><p></p>
         Combate ${hCombate}<br>
         Conocimiento ${hConocimiento}<br>
         Latrocinio ${hLatrocinio}<br>
         Magia ${hMagia}<br>
         Sociales ${hSociales}<br></p></strong>
+        </div>
     </div>`;
     let armasHTML = `<div class="armas oculto separador">
         <h5><strong>Armamento</strong></h5><br><p>
@@ -319,12 +324,13 @@ document.getElementById("descargarPDF").addEventListener("click", ()=>{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pj Seleccionado</title>
     <link rel="stylesheet" href="stylePj.css">
 </head>
 <body>
 <main >
         <div class="flex-container">${cardElement}</div>
+        <button>Imprimir</button>
+        <script src="boton.js"></script>
 </main>
 </body>
 </html>`);
