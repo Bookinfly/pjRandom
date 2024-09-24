@@ -220,9 +220,15 @@ footer{
 .footerElement p {
     white-space: normal; /* Permite que el texto pase a una nueva línea si es necesario */
     word-wrap: break-word; /* Evita que palabras largas sobrepasen el contenedor */
+    padding: 5px;
+    margin: 20px;
 }
 
-@media (max-width: 1010px) {
+.realizadoPor {
+    margin: 30px;
+}
+
+@media (max-width: 1430px) {
     /* Estilos que se aplicarán cuando el ancho de la pantalla sea igual o menor a 768px */
     .footerElement p {
     display: none;
@@ -231,6 +237,10 @@ footer{
     .footerElement {
         min-width: 40vh;
         max-width: 100vh;
+    }
+
+    .realizadoPor {
+        display: none;
     }
 }
 
@@ -268,4 +278,8 @@ footer{
     transition: 0.5s;
     color: var(--color-two);
     font-size: 2.8em;
+}
+
+.realizadoPor {
+    margin: 30px;
 }
