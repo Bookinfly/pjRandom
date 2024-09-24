@@ -6,26 +6,26 @@ let botonDescarga = document.getElementById("#descargarPDF");
 
 // Array de imágenes de personajes con clases de imagen asignadas
 const ilustraciones = [
-    "<img src='/img/ArcherElf.jpg' class=llave.img>",
-    "<img src='/img/humanExplorer.jpg' class=llave.img>",
-    "<img src='/img/humanKnigth.jpg' class=llave.img>",
-    "<img src='/img/humanWarrior.jpg' class=llave.img>",
-    "<img src='/img/mageElf.jpg' class=llave.img>",
-    "<img src='/img/mageHalfling.jpg' class=llave.img>",
-    "<img src='/img/rougueElf.jpg' class=llave.img>",
-    "<img src='/img/warriorElf.jpg' class=llave.img>",
-    "<img src='/img/guerreroEnano.jpg' class=llave.img>",
-    "<img src='/img/barbarrianGoblin.jpg' class=llave.img>",
-    "<img src='/img/halflingPicaro.jpg' class=llave.img>",
-    "<img src='/img/hummanBarbarian).jpg' class=llave.img>",
-    "<img src='/img/jovenEnana.jpg' class=llave.img>",
-    "<img src='/img/arqueraGoblin.jpg' class=llave.img>",
-    "<img src='/img/nobleEscpadachina.jpg' class=llave.img>",
-    "<img src='/img/noble.jpg' class=llave.img>",
-    "<img src='/img/halflingGuerrera.jpg' class=llave.img>",
-    "<img src='/img/comercianteEnano.jpg' class=llave.img>",
-    "<img src='/img/goblinAsesino.jpg' class=llave.img>",
-    "<img src='/img/paladin.jpg' class=llave.img>"
+    "<img src='/img/ArcherElf.jpg' alt='Archer Elf'>",
+    "<img src='/img/humanExplorer.jpg' alt='Human Explorer'>",
+    "<img src='/img/humanKnigth.jpg' alt='Human Knight'>",
+    "<img src='/img/humanWarrior.jpg' alt='Human Warrior'>",
+    "<img src='/img/mageElf.jpg' alt='Mage Elf'>",
+    "<img src='/img/mageHalfling.jpg' alt='Mage Halfling'>",
+    "<img src='/img/rougueElf.jpg' alt='Rogue Elf'>",
+    "<img src='/img/warriorElf.jpg' alt='Warrior Elf'>",
+    "<img src='/img/guerreroEnano.jpg' alt='Enano Guerrero'>",
+    "<img src='/img/barbarrianGoblin.jpg' alt='Goblin Barbarian'>",
+    "<img src='/img/halflingPicaro.jpg' alt='Halfling Picaro'>",
+    "<img src='/img/hummanBarbarian.jpg' alt='Human Barbarian'>",
+    "<img src='/img/jovenEnana.jpg' alt='Young Dwarf'>",
+    "<img src='/img/arqueraGoblin.jpg' alt='Goblin Archer'>",
+    "<img src='/img/nobleEscpadachina.jpg' alt='Noble Fencer'>",
+    "<img src='/img/noble.jpg' alt='Noble'>",
+    "<img src='/img/halflingGuerrera.jpg' alt='Halfling Warrior'>",
+    "<img src='/img/comercianteEnano.jpg' alt='Dwarf Merchant'>",
+    "<img src='/img/goblinAsesino.jpg' alt='Goblin Assassin'>",
+    "<img src='/img/paladin.jpg' alt='Paladin'>"
 ];
 
 // Arrays de nombres, razas y profesiones de los personajes
